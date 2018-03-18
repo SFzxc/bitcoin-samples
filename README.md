@@ -61,6 +61,7 @@ https://www.amazon.com/Mastering-Bitcoin-Programming-Open-Blockchain/dp/14919543
 - [bitcoin-ruby](https://github.com/lian/bitcoin-ruby) This is a ruby library for interacting with the bitcoin protocol/network.
 - [money-tree) BIP32](https://github.com/GemHQ/money-tree) A Ruby implementation of Bitcoin HD Wallets (Hierarchical Deterministic.
 - [katapaty](https://github.com/longhoangwkm/katapaty) A ruby gem for communicating with a Counterparty (BTC/ XCP) API server
+- [insight-ruby](https://github.com/genaromadrid/insight-ruby) Ruby wrapper for insight.bitpay.com API
 
 ## Examples
 
