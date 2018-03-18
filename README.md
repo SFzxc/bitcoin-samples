@@ -8,40 +8,45 @@ https://www.amazon.com/Mastering-Bitcoin-Programming-Open-Blockchain/dp/14919543
 
 ## How to create a new testnet wallet ?!
 
-https://counterwallet-testnet.coindaddy.io/#pages/balances.html
+- https://counterwallet-testnet.coindaddy.io/#pages/balances.html
 
 ## How to get free Bitcoin testnet ?!
 
-https://testnet.manu.backend.hamburg/faucet
+- https://testnet.manu.backend.hamburg/faucet
 
 ## How to track bitcoin transactions, addresses ?!
 
-https://testnet.blockchain.info/
-https://live.blockcypher.com/bcy/
-https://www.blocktrail.com/tBTC
-https://testnet.blockexplorer.com/
+- https://testnet.blockchain.info/
+
+- https://live.blockcypher.com/bcy/
+
+- https://www.blocktrail.com/tBTC
+
+- https://testnet.blockexplorer.com/
 
 ## How to get a raw transaction from tx hash ?!
 
-https://testnet.blockexplorer.com/api/rawtx/<tx_hash>
-https://testnet.blockchain.info/tx/<tx_hash>?format=hex
+- https://testnet.blockexplorer.com/api/rawtx/<tx_hash>
+
+- https://testnet.blockchain.info/tx/<tx_hash>?format=hex
 
 ## How to get json format informations of the transaction ?
 
-https://testnet.blockchain.info/tx/<tx_hash>?format=json
-https://api.blockcypher.com/v1/btc/test3/txs/<tx_hash>?includeHex=true
+- https://testnet.blockchain.info/tx/<tx_hash>?format=json
+
+- https://api.blockcypher.com/v1/btc/test3/txs/<tx_hash>?includeHex=true
 
 ## How to decode a raw hex of tx ?!
 
-https://live.blockcypher.com/bcy/decodetx
+- https://live.blockcypher.com/bcy/decodetx
 
 ## How to broadcast your transaction online ?!
 
-https://live.blockcypher.com/btc/pushtx/
+- https://live.blockcypher.com/btc/pushtx/
 
 ## How to get current Bitcoin transaction fee predictions in JSON format
 
-https://bitcoinfees.earn.com/api
+- https://bitcoinfees.earn.com/api
 
 ```
 { "fastestFee": 40, "halfHourFee": 20, "hourFee": 10 }
@@ -49,7 +54,7 @@ https://bitcoinfees.earn.com/api
 
 ## Bitcoind commandline
 
-https://github.com/taariq/bitcoind-simple-send
+- https://github.com/taariq/bitcoind-simple-send
 
 ## Useful gems
 
