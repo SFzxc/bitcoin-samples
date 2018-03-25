@@ -1,0 +1,21 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    bitcoin (0.2.0)
+      bitcoin-ruby
+    bitcoin-ruby (0.0.18)
+    digest (0.0.1)
+    ffi (1.9.23)
+    money-tree (0.9.0)
+      ffi
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bitcoin
+  digest
+  money-tree
+
+BUNDLED WITH
+   1.16.0
