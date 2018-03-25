@@ -11,9 +11,9 @@ require 'digest'
 #   - Set configuration file path for libbitcoin explore
 #     export BX_CONFIG="/usr/local/etc/libbitcoin/testnet.cfg" to .bash_profile or .zshrc
 #   - $ bx seed | bx hd-new
-#
+#   - @master_node = MoneyTree::Node.from_bip32(master_private_key)
 
-# Getting seed EC-HEX 64 hexadecimal digits
+# Or getting seed EC-HEX 64 hexadecimal digits
 seed = Digest::SHA256.digest('happy sad love password haha hihi').unpack("H*")[0]
 puts seed
 
