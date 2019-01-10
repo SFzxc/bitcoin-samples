@@ -4,9 +4,8 @@ GEM
     bitcoin (0.2.0)
       bitcoin-ruby
     bitcoin-ruby (0.0.18)
-    digest (0.0.1)
-    ffi (1.9.23)
-    money-tree (0.9.0)
+    ffi (1.10.0)
+    money-tree (0.10.0)
       ffi
 
 PLATFORMS
@@ -14,8 +13,7 @@ PLATFORMS
 
 DEPENDENCIES
   bitcoin
-  digest
   money-tree
 
 BUNDLED WITH
-   1.16.0
+   2.0.1
