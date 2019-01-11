@@ -8,18 +8,29 @@ require 'pry'
 # one from above method
 #
 # No duplicate - keyspace is so massive  `birthday paradox`
+
+BASE58_ALPHA = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
+
 def generate_key
   SecureRandom.hex(32)
 end
 
 def int_to_base58(int_val, leading_zero_bytes=0)
   alpha = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
-  base58_val, base = '', alpha.size
+  base58_val, base = '', BASE58_ALPHA.size
   while int_val > 0
     int_val, remainder = int_val.divmod(base)
-    base58_val = alpha[remainder] + base58_val
+    base58_val = BASE58_ALPHA[remainder] + base58_val
   end
   base58_val
+end
+
+def base58_to_int(str)
+  sum_int = 0
+  str.chars.reverse.each_with_index do |char, index|
+    sum_int += (58**index)*BASE58_ALPHA.index(char)
+  end
+  sum_int
 end
 
 # The wallet import format (WIF) is a format
@@ -31,7 +42,6 @@ end
 
 # SHA-256 hash
 def sha256(hex)
- binding.pry
  Digest::SHA256.hexdigest([hex].pack("H*"))
 end
 
@@ -41,8 +51,8 @@ def checksum(hex)
 end
 
 PRIV_KEY_VERSION = '80'
-def wif(hex)
-  data = PRIV_KEY_VERSION + hex
+def wif(hex, version = PRIV_KEY_VERSION)
+  data = version + hex
   encode_base58(data + checksum(data))
 end
 
@@ -68,4 +78,62 @@ end
 # "809ab4f6143cfdaf9d9cbc308c8dc9f79dedf3bd750e853bff624bc761f1d66d8bfe5200bd"
 # encode_base58('809ab4f6143cfdaf9d9cbc308c8dc9f79dedf3bd750e853bff624bc761f1d66d8bfe5200bd')
 # "5JzRMu3tsXsE7vDn8qVg4djqfS5AG4oJWW5Nm9PLrQP7pUU7Q28"
-puts wif(generate_key)
+wif(generate_key)
+
+
+# Deriving Public Keys
+priv_key = wif(generate_key)
+
+require 'openssl'
+
+curve = OpenSSL::PKey::EC.new('secp256k1')
+curve.generate_key
+
+puts curve.private_key.to_s(16)
+# Public Key is of the type OpenSSL::PKey::EC::Point because in
+# elliptic curve crypto, it represents a point on the curve
+#
+# to_bn to convert it to a BigNumber.
+# The first byte will be 0x04
+# The next 32 bytes will represent x
+# The next 32 bytes will represent y
+# Total 65 bytes
+puts curve.public_key.to_bn.to_s(16)
+
+message = "Hello World!"
+signature = curve.dsa_sign_asn1(message)
+puts curve.dsa_sign_asn1(message)
+
+# Verification
+pub_key_bn = curve.public_key.to_bn
+
+group = OpenSSL::PKey::EC::Group.new('secp256k1')
+curve2 = OpenSSL::PKey::EC.new(group)
+
+curve2.public_key = OpenSSL::PKey::EC::Point.new(group, pub_key_bn)
+
+puts curve2.dsa_verify_asn1(message, signature)
+
+# RIPEMD -160 (160 bit) hash
+def rmd160(hex)
+  Digest::RMD160.hexdigest([hex].pack("H*"))
+end
+
+# Turn public key into the 160 bit public key hash
+def public_key_hash(hex)
+  rmd160(sha256(hex))
+end
+
+pub_key_hex = curve.public_key.to_bn.to_s(16)
+puts public_key_hash(pub_key_hex)
+
+# Time to encode base58check
+ADDRESS_VERSION = '00'
+def generate_address(pub_key_hash)
+  pk = ADDRESS_VERSION + pub_key_hash
+  encode_base58(pk + checksum(pk))
+end
+
+puts wif(curve.private_key.to_s(16), 'EF') # EF is testnet
+puts generate_address(public_key_hash(pub_key_hex))
+
